@@ -14,5 +14,10 @@ server.use(express.json());
 
 server.use('/api/auth', authRouter);
 server.use('/api/jokes', authenticate, jokesRouter);
+server.use(errorHandler);
 
+function errorHandler(error, req, res, next) {
+    console.log(error);
+    res.status(error.stat).json({ error: error.message });
+}
 module.exports = server;
