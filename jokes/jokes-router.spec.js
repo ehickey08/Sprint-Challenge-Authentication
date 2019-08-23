@@ -1,6 +1,5 @@
 const request = require('supertest');
 const db = require('../database/dbConfig');
-const Users = require('../database/usersModel');
 const server = require('../api/server');
 
 describe('jokes router', () => {
