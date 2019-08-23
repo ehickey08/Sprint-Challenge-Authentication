@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const secrets = require('./secrets')
 const Users = require('../database/usersModel');
 const { verifyNewUser, verifyUserInput } = require('./authenticate-middleware');
 
@@ -23,7 +23,7 @@ router.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body;
         let storedUser = await Users.findByUsername(username);
-        if (storedUser && bcrypt.compareSync(storedUser.password, password)) {
+        if (storedUser && bcrypt.compareSync(password, storedUser.password)) {
             const token = generateToken(storedUser);
             res.status(200).json({
                 message: `Welcome ${storedUser.username}!`,

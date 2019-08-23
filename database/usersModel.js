@@ -16,7 +16,7 @@ function findByUsername(username){
 }
 
 function findById(id){
-    return db('users').where({id})
+    return db('users').where({id}).first()
 }
 
 function add(user){
